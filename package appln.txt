@@ -1,0 +1,79 @@
+package com.appIn;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+//Select * from users where username= 'Abika' and password ='12345'
+/**
+ * Servlet implementation class inServlet
+ */
+@WebServlet("/inServlet")
+public class inServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public inServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.setContentType("text/html");
+		
+		PrintWriter out = response.getWriter();
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		//JDBC connection
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");	
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3001/tourism","root","root");
+			Statement st = conn.createStatement();
+			String query = " Select * from users where username= '"+username+"' and password ='"+password+"'";
+			ResultSet rs = st.executeQuery(query);
+			if(rs.next()) {
+				out.print("<h1>"+username+":Welcome </h1>");
+				out.print("<h1> Login Successfully </h1><br>");
+			}else {
+				out.print("<h1>"+username+":PLease enter userId and password </h1>");
+				out.print("<h1> Login Failed </h1><br>");
+				 
+			}
+			rs.close();
+			st.close();
+			conn.close();
+		}catch(SQLException e) {
+			out.print("<h1> Login Failed coz of server</h1><br>");
+			e.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

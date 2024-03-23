@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Entry Form</title>
+<style>
+    form {
+        margin: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color:lightblue;
+    }
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+
+<form action="places1" method="post">
+    <label for="id">ID:</label>
+    <input type="text" id="id" name="id" required>
+    
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="specialist">Specialist:</label>
+    <input type="text" id="specialist" name="specialist" required>
+    
+    <label for="ratings">Ratings:</label>
+    <input type="number" id="ratings" name="ratings" step="0.01" min="0" max="10">
+    
+    <label for="hours_to_reach">Hours to Reach:</label>
+    <input type="number" id="hours_to_reach" name="hours_to_reach" min="0">
+    
+    <label for="created_at">Created At:</label>
+    <input type="date" id="created_at" name="created_at">
+    
+    <label for="updated_at">Updated At:</label>
+    <input type="date" id="updated_at" name="updated_at">
+    
+    <input type="submit" value="Submit">
+</form>
+<p><a href="ExplorePlaces">places1</a></p>
+
+</body>
+</html>
